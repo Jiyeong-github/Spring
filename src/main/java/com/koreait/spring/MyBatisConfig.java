@@ -9,7 +9,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 import javax.sql.DataSource;
-
+//위에 @Configuration이 있어서
+//스프링이 지 알아서 찾아서
+//적용시켜주는것
 @Configuration
 // @Mapper interface 스캔 경로
 @MapperScan(basePackages = "com.koreait.spring")

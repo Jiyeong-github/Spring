@@ -1,4 +1,4 @@
-package com.koreait.spring;
+package com.koreait.spring.user;
 
 import lombok.*;
 
