@@ -11,9 +11,11 @@
 <head>
     <meta charset="UTF-8">
     <title>List</title>
+    <link rel="stylesheet" href="/res/css/list.css">
+    <script defer src="/res/js/list.js"></script>
 </head>
 <body>
-
+<div>로그인 아이디:${sessionScope.loginUser.uid}</div>
 <table>
     <tr>
         <th>번호</th>

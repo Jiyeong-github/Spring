@@ -12,4 +12,18 @@
         ON A.iuser = B. iuser
         ORDER BY A.iboard DESC;
     </select>
+
+    <select id="selBoard" resultType="BoardDomain">
+        SELECT A.title, A.iboard, A.ctnt, B.iuser, A.regdt
+             , B.unm AS writerNm , B.profileImg
+        FROM t_board A
+        INNER JOIN t_user B
+        ON A.iuser = B. iuser
+        WHERE A.iboard = #{iboard};
+<!--#이 붙었으면 parameter가 있다는 말-->
+    </select>
+
+    <select id="delBoard">
+        DELETE FROM t_board WHERE iboard=? AND iuser=?
+    </select>
 </mapper>

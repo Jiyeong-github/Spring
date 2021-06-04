@@ -15,4 +15,11 @@ public class BoardService {
     public List<BoardDomain> selBoardList() {
         return mapper.selBoardList();
     }
+    public BoardDomain selBoard(BoardDTO param){
+        return mapper.selBoard(param);
+    }
+
+    public BoardDomain delBoard(BoardDTO param){
+        return mapper.delBoard(param);
+    }
 }

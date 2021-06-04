@@ -4,11 +4,16 @@ import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
+
 @Service
 public class UserService {
 
     @Autowired
     public UserMapper mapper;
+
+    @Autowired
+    private HttpSession session;
 
     public int join(UserEntity param) {
         String cryptPw = BCrypt.hashpw(param.getUpw(), BCrypt.gensalt());
@@ -21,9 +26,11 @@ public class UserService {
         if (result == null) {//아이디 없음
             return "/user/login";
         } else if (BCrypt.checkpw(param.getUpw(), result.getUpw())) { //로그인 성공
+            //세션처리
+            session.setAttribute("loginUser",result);
             return "/board/list";
         } else {//비밀번호 틀림
-            return "/user/login";
+            return "/user/login?err=2";
         }
 
     }
