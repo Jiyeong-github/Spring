@@ -25,22 +25,29 @@ public class BoardController {
     }
 
     @RequestMapping("/detail")
-    public String detail(BoardDTO param, Model model){
-        System.out.println("iboard:"+param.getIboard());
+    public String detail(BoardDTO param, Model model) {
+        System.out.println("iboard:" + param.getIboard());
         BoardDomain data = service.selBoard(param);
-        model.addAttribute("data",data);
+        model.addAttribute("data", data);
         return "board/detail";
     }
 
     @ResponseBody //return해주는 걸 무조건 문자열로(json 형태)
-    @RequestMapping(value="/cmtInsSel", method= RequestMethod.POST)
-    public Map<String,Integer> cmtInsSel(@RequestBody BoardCmtEntity param){
-        Map<String,Integer> data = new HashMap();
-        List<String> list = new ArrayList<>();
-
-        data.put("result",1);
-        data.put("age",30);
+    @RequestMapping(value = "/cmtIns", method = RequestMethod.POST)
+    public Map<String, Integer> cmtIns(@RequestBody BoardCmtEntity param) {
+        System.out.println("param="+param);
+        int result = service.insBoardCmt(param);
+        Map<String, Integer> data = new HashMap();
+        data.put("result",result);
 
         return data;
     }
+
+    @ResponseBody
+    @RequestMapping("/cmtSel")
+    public List<BoardCmtDomain> cmtSel(BoardCmtEntity param) {
+        return service.selBoardCmtList(param);
+    }
+
+
 }

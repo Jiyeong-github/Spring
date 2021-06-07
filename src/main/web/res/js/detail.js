@@ -16,17 +16,21 @@ function regCmt() {
 function regAjax(param) {
 	const init = {
 		method: 'POST',
-		body: new URLSearchParams(param)
+		body: JSON.stringify(param),
+		headers:{
+			'accept' : 'application/json',
+			'content-type' : 'application/json;charset=UTF-8'
+		}
 	};
 
-	fetch('cmtInsSel', init) //cmtinssel 이거 어디서 나온 거임?
+	fetch('cmtIns', init) //cmtins ->BoardController
 		.then(function(res) {
 			return res.json();
 		})
 		.then(function(myJson) {
 			console.log(myJson);
 
-			switch (myJson.result) {
+			switch (myJson.result) {//댓글이 지워지는 건 이거 때문!
 				case 0:
 					alert('등록 실패');
 					break;
@@ -41,8 +45,8 @@ function regAjax(param) {
 //서버에게 댓글 리스트 자료 달라고 요청하는 함수
 function getListAjax() {
 	var iboard = cmtListElem.dataset.iboard;
-
-	fetch('cmtInsSel?iboard=' + iboard)
+//get 방식
+	fetch('cmtSel?iboard=' + iboard)
 		.then(function(res) {
 			return res.json();
 		})
@@ -53,20 +57,20 @@ function getListAjax() {
 		});
 }
 
-function makeCmtElementList(data) {
+function makeCmtElemList(data) {
 
 	cmtListElem.innerHTML = '';
 	var tableElem = document.createElement('table');
 	var trElemTitle = document.createElement('tr');
 	var thElemCtnt = document.createElement('th');
 	var thElemWriter = document.createElement('th');
-	var thElemRedgt = document.createElement('th');
+	var thElemRegdt = document.createElement('th');
 	var thElemBigo = document.createElement('th');
 	//append만 써도 ㄱㅊ 유연함
 
 	thElemCtnt.innerText = '내용';
 	thElemWriter.innerText = '작성자';
-	thElemRedgt.innerText = '작성일';
+	thElemRegdt.innerText = '작성일';
 	thElemBigo.innerText = '비고';
 
 	trElemTitle.append(thElemCtnt);
@@ -177,6 +181,6 @@ function closeModModal() {
 }
 
 
-//getListAjax(); // 이 파일이 임포트되면 함수 1회 호
+getListAjax(); // 이 파일이 임포트되면 함수 1회 호
 
 

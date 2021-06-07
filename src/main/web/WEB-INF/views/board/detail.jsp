@@ -22,9 +22,19 @@
         </form>
     </div>
 </c:if>
-<div id="cmtList" data-login_user_pk="${sessionScope.loginUser.iuser}"
-     data-iboard="${param.iboard}"></div>
-<!--dataset이라고 부름,data-login-user-pk 로 넣으면 js에서 loginUserPk로 받으면 된대요->
+<div id="cmtList" data-login-user-pk="${sessionScope.loginUser.iuser}"
+     data-iboard="${param.iboard}">
+    <table>
+        <tr>
+            <th>내용</th>
+            <th>작성자</th>
+            <th>작성일</th>
+            <th>비고</th>
+        </tr>
+    </table>
+</div>
+<!--innerHTML / innerText / append() / appendChild() -->
+<!--dataset이라고 부름,data-login-user-pk 로 넣으면 js에서 loginUserPk로 받으면 된대요-->
 
 </body>
 </html>
