@@ -1,10 +1,15 @@
 package com.koreait.spring.user;
 
+import org.apache.commons.io.FilenameUtils;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
+import java.util.UUID;
 
 @Service
 public class UserService {
@@ -27,11 +32,37 @@ public class UserService {
             return "/user/login";
         } else if (BCrypt.checkpw(param.getUpw(), result.getUpw())) { //로그인 성공
             //세션처리
-            session.setAttribute("loginUser",result);
+            session.setAttribute("loginUser", result);
             return "/board/list";
         } else {//비밀번호 틀림
             return "/user/login?err=2";
         }
+    }
 
+    public String uploadProfile(MultipartFile img) {
+        UserEntity loginUser = (UserEntity) session.getAttribute("loginUser");
+        final String PATH = "D:/springImg/" + loginUser.getIuser();
+
+        File folder = new File(PATH);
+        folder.mkdirs();
+
+        String ext = FilenameUtils.getExtension(img.getOriginalFilename());
+        String fileNm = UUID.randomUUID().toString() + "." + ext;
+
+        File target = new File(PATH + "/" + fileNm);
+        try {
+            img.transferTo(target);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        UserEntity param = new UserEntity();
+        param.setIuser(loginUser.getIuser());
+        param.setProfileImg(fileNm);
+
+        mapper.updUser(param);
+        loginUser.setProfileImg(fileNm);
+
+        return "/user/profile";
     }
 }

@@ -20,6 +20,7 @@
 
     <!--몇 차 주소가 오든 노상관-->
     <mvc:resources mapping="/res/**" location="/res/"/>
+    <mvc:resources mapping="/img/**" location="file:///D:/springImg/"/>
 
     <!-- 사용할 파일명을 완성해주는 객체 -->
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">

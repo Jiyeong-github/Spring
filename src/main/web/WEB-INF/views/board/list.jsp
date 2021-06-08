@@ -16,6 +16,10 @@
 </head>
 <body>
 <div>로그인 아이디:${sessionScope.loginUser.uid}</div>
+<div>
+    <span>로그인 아이디 : ${sessionScope.loginUser.uid}</span>
+    <span><a href="/user/profile">프로필</a></span>
+</div>
 <table>
     <tr>
         <th>번호</th>
@@ -38,11 +42,11 @@
 
             <c:choose>
                 <c:when test="${empty item.profileImg }">
-                    <c:set var="img" value="/res/img/noprofile.jpg"/>
+                    <c:set var="img" value="/res/img/noprofile.jpeg"/>
                 </c:when>
                 <c:otherwise>
                     <c:set var="img"
-                           value="/res/img/user/${item.iuser}/${item.profileImg}"/>
+                           value="/img/${item.iuser}/${item.profileImg}"/>
                 </c:otherwise>
             </c:choose>
 
