@@ -7,19 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>List</title>
-    <link rel="stylesheet" href="/res/css/list.css">
-    <script defer src="/res/js/list.js"></script>
-</head>
-<body>
-<div>로그인 아이디:${sessionScope.loginUser.uid}</div>
-<div>
-    <span>로그인 아이디 : ${sessionScope.loginUser.uid}</span>
-    <span><a href="/user/profile">프로필</a></span>
-</div>
+
 <table>
     <tr>
         <th>번호</th>
@@ -64,5 +52,3 @@
         </tr>
     </c:forEach>
 </table>
-</body>
-</html>

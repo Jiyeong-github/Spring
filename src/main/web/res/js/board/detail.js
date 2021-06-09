@@ -153,7 +153,7 @@ function modAjax() {
     var cmtModFrmElem = document.querySelector('#cmtModFrm');
     var param = {
         icmt: cmtModFrmElem.icmt.value,
-        modCmt: cmtModFrmElem.modCmt.value
+        cmt: cmtModFrmElem.modCmt.value
     }
 
     const init = {

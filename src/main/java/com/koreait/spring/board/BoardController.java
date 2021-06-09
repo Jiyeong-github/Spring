@@ -35,10 +35,10 @@ public class BoardController {
     @ResponseBody //return해주는 걸 무조건 문자열로(json 형태)
     @RequestMapping(value = "/cmt", method = RequestMethod.POST)
     public Map<String, Integer> cmtIns(@RequestBody BoardCmtEntity param) {
-        System.out.println("param="+param);
+        System.out.println("param=" + param);
         int result = service.insBoardCmt(param);
         Map<String, Integer> data = new HashMap();
-        data.put("result",result);
+        data.put("result", result);
 
         return data;
     }
@@ -52,24 +52,34 @@ public class BoardController {
     }
 
     @ResponseBody
-    @RequestMapping(value="/cmt/{icmt}",method=RequestMethod.DELETE)
-    public Map<String, Integer> cmtDel(BoardCmtEntity param, @PathVariable int icmt){
+    @RequestMapping(value = "/cmt/{icmt}", method = RequestMethod.DELETE)
+    public Map<String, Integer> cmtDel(BoardCmtEntity param, @PathVariable int icmt) {
         param.setIcmt(icmt);
 
         int result = service.delBoardCmt(param);
 
-        Map<String,Integer> data = new HashMap();
-        data.put("result",result);
+        Map<String, Integer> data = new HashMap();
+        data.put("result", result);
 
         return data;
     }
 
     @ResponseBody
-    @RequestMapping(value="/cmt", method = RequestMethod.PUT)
+    @RequestMapping(value = "/cmt", method = RequestMethod.PUT)
     public Map<String, Integer> cmtUpd(@RequestBody BoardCmtEntity param) {
         int result = service.updBoardCmt(param);
         Map<String, Integer> data = new HashMap();
         data.put("result", result);
         return data;
+    }
+
+    @GetMapping("/writeMod")
+    public void writeMod() {
+    }
+
+    @PostMapping("writeMod")
+    public String writeMod(BoardEntity param) {
+        int iboard = service.writeMod(param);
+        return "redirect:detail?iboard=" + iboard;
     }
 }

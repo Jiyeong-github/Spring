@@ -1,26 +1,18 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: Administrator
-  Date: 2021-06-08
-  Time: 오후 2:40
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<html>
-<head>
-    <title>프로필</title>
-</head>
-<body>
+
 <c:choose>
     <c:when test="${empty sessionScope.loginUser.profileImg}">
         <c:set var="img" value="/res/img/noprofile.jpeg"/>
+        <!--pageContext에 img라는 key 값으로 저장-->
     </c:when>
     <c:otherwise>
         <c:set var="img" value="/img/${sessionScope.loginUser.iuser}/${sessionScope.loginUser.profileImg}"/>
+    <!--/res들은 resource 파일과 연결시키겠다고 선언-->
     </c:otherwise>
 </c:choose>
+<div>${img}</div>
 <div>
     <form action="profile" method="post" enctype="multipart/form-data" id="frm" onsubmit="return imgChk();">
         이미지변경 : <input type="file" name="profileImg" accept="image/*">
@@ -44,5 +36,3 @@
         }
     }
 </script>
-</body>
-</html>

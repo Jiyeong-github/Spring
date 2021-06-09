@@ -46,4 +46,17 @@ public class BoardService {
         param.setIuser(loginUser.getIuser());
         return cmtMapper.updBoardCmt(param);
     }
+
+    //return 값은 iboard  값
+    public int writeMod(BoardEntity param){
+        UserEntity loginUser = (UserEntity) session.getAttribute("loginUser");
+        param.setIuser(loginUser.getIuser());
+
+        if(param.getIboard() == 0){
+            //등록
+            return 0;
+        }
+        //수정
+        return 0;
+    }
 }
