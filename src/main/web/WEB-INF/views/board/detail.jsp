@@ -2,10 +2,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div><a href="#" onclick="goBack();">돌아가기</a></div>
-<div>글번호 : ${requestScope.boardDomain.iboard}</div>
-<div>작성자 : <c:out value="${requestScope.boardDomain.writerNm}"/> | 작성일 : ${requestScope.boardDomain.regdt}</div>
-<div><c:out value="${requestScope.boardDomain.ctnt}"/></div>
-<div>${requestScope.boardDomain.ctnt}</div>
+<c:if test="${requestScope.data.iuser eq sessionScope.loginUser.iuser}">
+<div><a href="writeMod?iboard=${data.iboard}">수정</a></div>
+<div><a href="delBoard?iboard=${data.iboard}">삭제</a></div>
+</c:if>
+
+<h1>${requestScope.data.title}</h1>
+<div>글번호 : ${requestScope.data.iboard}<i id="favIcon" class="far fa-kiss-wink-heart pointer"></i></div>
+<div>작성자 : <c:out value="${requestScope.data.writerNm}"/> | 작성일 : ${requestScope.data.regdt}</div>
+<div><c:out value="${requestScope.data.ctnt}"/></div>
+
 
 <c:if test="${not empty sessionScope.loginUser}">
     <div>

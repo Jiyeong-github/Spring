@@ -28,6 +28,7 @@ public class BoardController {
     public String detail(BoardDTO param, Model model) {
         System.out.println("iboard:" + param.getIboard());
         BoardDomain data = service.selBoard(param);
+        System.out.println("data:"+data);
         model.addAttribute("data", data);
         return "board/detail";
     }
@@ -74,12 +75,35 @@ public class BoardController {
     }
 
     @GetMapping("/writeMod")
-    public void writeMod() {
+    public void writeMod(BoardDTO param, Model model) {
+        System.out.println("param="+param);
+        if(param.getIboard()>0){
+            model.addAttribute("data",service.selBoard(param));
+        }
     }
 
-    @PostMapping("writeMod")
-    public String writeMod(BoardEntity param) {
+    @PostMapping("/writeMod")
+    public String writeModProc(BoardEntity param) {
         int iboard = service.writeMod(param);
         return "redirect:detail?iboard=" + iboard;
+    }
+
+    @GetMapping("/delBoard")
+    public String delBoard(BoardEntity param){
+        service.delete(param);
+        return "redirect:list";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/delBoard/{iboard}", method = RequestMethod.DELETE)
+    public Map<String, Integer> delBoard(BoardEntity param,@PathVariable int iboard) {
+        param.setIboard(iboard);
+
+        int result = service.delete(param);
+
+        Map<String, Integer> data = new HashMap();
+        data.put("result", result);
+
+        return data;
     }
 }

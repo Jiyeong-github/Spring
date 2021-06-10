@@ -4,7 +4,13 @@
 
 <mapper namespace="com.koreait.spring.board.BoardMapper">
 
+    <update id="updBoard">
+        UPDATE t_board SET title=#{title}, ctnt=#{ctnt}
+        WHERE iboard=#{iboard} AND iuser =#{iuser}
+    </update>
+
     <insert id="insBoard" useGeneratedKeys="true" keyProperty="iboard">
+<!--keyProperty(iboard)로 useGeneratedKey를 -->
         INSERT INTO t_board(title,ctnt,iuser) VALUES(#{title},#{ctnt},#{iuser})
     </insert>
 
@@ -28,7 +34,7 @@
 <!--#이 붙었으면 parameter가 있다는 말-->
     </select>
 
-    <select id="delBoard">
-        DELETE FROM t_board WHERE iboard=? AND iuser=?
-    </select>
+    <delete id="delBoard">
+        DELETE FROM t_board WHERE iboard = #{iboard} AND iuser = #{iuser}
+    </delete>
 </mapper>

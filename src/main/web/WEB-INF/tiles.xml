@@ -9,11 +9,12 @@
     </definition>
 
     <definition name="*" extends="basic_template">
-        <put-attribute name="content1" value="/WEB-INF/views/{1}.jsp" />
+        <put-attribute name="content" value="/WEB-INF/views/{1}.jsp" />
+        <put-attribute name="res" value="" />
     </definition>
 
     <definition name="*/*" extends="basic_template">
-        <put-attribute name="content2" value="/WEB-INF/views/{1}/{2}.jsp" />
+        <put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />
         <put-attribute name="res" value="{1}/{2}" />
     </definition>
 

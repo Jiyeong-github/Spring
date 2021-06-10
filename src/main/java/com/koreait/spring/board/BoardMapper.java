@@ -8,5 +8,7 @@ import java.util.List;
 public interface BoardMapper {
     List<BoardDomain> selBoardList(); //객체 옆 ID값();
     BoardDomain selBoard(BoardDTO param);
-    BoardDomain delBoard(BoardDTO param);
+    int delBoard(BoardEntity param);
+    int insBoard(BoardEntity param);
+    int updBoard(BoardEntity param);
 }
