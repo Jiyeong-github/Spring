@@ -15,13 +15,24 @@
     </insert>
 
     <select id="selBoardList" resultType="BoardDomain">
-        <!--select만 꼭 resultType 적어야 함-->
-        SELECT A.title, A.iboard, B.iuser, A.regdt
-        , B.unm AS writerNm , B.profileImg
+        SELECT A.iboard, A.title, A.iuser, A.regdt
+        , B.unm AS writerNm, B.profileImg
+        , CASE WHEN C.iboard IS NULL THEN 0 ELSE 1 END AS isFav
         FROM t_board A
         INNER JOIN t_user B
-        ON A.iuser = B. iuser
-        ORDER BY A.iboard DESC;
+        ON A.iuser = B.iuser
+        <if test="selType eq 0">
+            LEFT JOIN t_board_fav C
+        </if>
+        <if test="selType eq 1">
+            INNER JOIN t_board_fav C
+        </if>
+        ON A.iboard = C.iboard
+        AND C.iuser = #{iuser}
+        ORDER BY A.iboard DESC
+        <if test="recordCnt > 0">
+            LIMIT #{startIdx}, #{recordCnt}
+        </if>
     </select>
 
     <select id="selBoard" resultType="BoardDomain">
@@ -37,4 +48,9 @@
     <delete id="delBoard">
         DELETE FROM t_board WHERE iboard = #{iboard} AND iuser = #{iuser}
     </delete>
+
+    <select id="selMaxPageVal" resultType="_int">
+        SELECT CEIL(COUNT(iboard) / #{recordCnt}) FROM t_board
+    </select>
+
 </mapper>

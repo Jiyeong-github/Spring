@@ -20,8 +20,8 @@ public class BoardService {
     @Autowired
     private MyUtils myUtils;
 
-    public List<BoardDomain> selBoardList() {
-        return mapper.selBoardList();
+    public int selMaxPageVal(BoardDTO param){
+        return mapper.selMaxPageVal(param);
     }
 
     public BoardDomain selBoard(BoardDTO param) {
@@ -33,9 +33,8 @@ public class BoardService {
         return cmtMapper.insBoardCmt(param);
     }
 
-    public List<BoardCmtDomain> selBoardCmtList(BoardCmtEntity param) {
-        return cmtMapper.selBoardCmtList(param);
-    }
+    public List<BoardCmtDomain> selBoardCmtList(BoardCmtEntity param)
+    { return cmtMapper.selBoardCmtList(param);}
 
     public int delBoardCmt(BoardCmtEntity param) {
         param.setIuser(myUtils.getLoginUserPk());
@@ -66,6 +65,14 @@ public class BoardService {
 
         param.setIuser(myUtils.getLoginUserPk());
         return mapper.delBoard(param);
+    }
+
+    public List<BoardDomain> selBoardList(BoardDTO param){
+        param.setIuser(myUtils.getLoginUserPk());
+        int startIdx = (param.getPage()-1)*param.getRecordCnt();
+        param.setStartIdx(startIdx);
+
+        return mapper.selBoardList(param);
     }
 }
 

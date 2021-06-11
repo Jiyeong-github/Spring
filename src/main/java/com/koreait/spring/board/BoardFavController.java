@@ -1,9 +1,11 @@
 package com.koreait.spring.board;
 
+import com.koreait.spring.MyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController //더이상 @ResponseBody 안 해줘도 됨
@@ -13,6 +15,9 @@ public class BoardFavController {
     @Autowired
     private BoardFavService service;
 
+    @Autowired
+    private BoardService service2;
+
     @PostMapping("/fav")
     public Map<String, Integer> insFav(@RequestBody BoardFavEntity param){
         Map<String, Integer> result =  new HashMap();
@@ -20,8 +25,9 @@ public class BoardFavController {
         return result;
     }
 
-    @GetMapping("/fav")
-    public Map<String, Integer> selFav(@RequestBody BoardFavEntity param){
+    @GetMapping("/fav/{iboard}")
+    public Map<String, Integer> selFav(BoardFavEntity param, @PathVariable int iboard){
+        param.setIboard(iboard);
         Map<String, Integer> result =  new HashMap();
         result.put("result", service.selFav(param));
         return result;
@@ -32,5 +38,11 @@ public class BoardFavController {
         Map<String, Integer> result = new HashMap();
         result.put("result", service.delFav(param));
         return result;
+    }
+
+    @GetMapping("/fav")
+    public List<BoardDomain> selFavBoardList(BoardDTO param){
+        param.setSelType(1);
+        return service2.selBoardList(param);
     }
 }

@@ -2,6 +2,7 @@ var cmtFrmElem = document.querySelector('#cmtFrm');
 var cmtListElem = document.querySelector('#cmtList');
 var cmtModModalElem = document.querySelector('#modal');
 var favIconElem = document.querySelector('#favIcon');
+
 favIconElem.addEventListener('click', function() {
     if(favIconElem.classList.contains('far')) { // X > O
         insFavAjax();
@@ -81,7 +82,7 @@ getFavAjax();
 
 function regCmt() {
 
-    var favVal = cmtFrmElem.cmt.value;
+    var cmtVal = cmtFrmElem.cmt.value;
     var param = {
         iboard: cmtListElem.dataset.iboard,
         cmt: cmtVal

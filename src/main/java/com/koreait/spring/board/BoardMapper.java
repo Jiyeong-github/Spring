@@ -6,8 +6,9 @@ import java.util.List;
 
 @Mapper
 public interface BoardMapper {
-    List<BoardDomain> selBoardList(); //객체 옆 ID값();
+    List<BoardDomain> selBoardList(BoardDTO param); //객체 옆 ID값();
     BoardDomain selBoard(BoardDTO param);
+    int selMaxPageVal(BoardDTO param);
     int delBoard(BoardEntity param);
     int insBoard(BoardEntity param);
     int updBoard(BoardEntity param);

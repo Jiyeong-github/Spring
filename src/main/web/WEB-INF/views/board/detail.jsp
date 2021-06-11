@@ -8,7 +8,10 @@
 </c:if>
 
 <h1>${requestScope.data.title}</h1>
-<div>글번호 : ${requestScope.data.iboard}<i id="favIcon" class="far fa-kiss-wink-heart pointer"></i></div>
+<div>글번호 : ${requestScope.data.iboard}</div>
+    <c:if test="${not empty sessionScope.loginUser}">
+        <i id="favIcon" class="far fa-kiss-wink-heart pointer"></i>
+    </c:if>
 <div>작성자 : <c:out value="${requestScope.data.writerNm}"/> | 작성일 : ${requestScope.data.regdt}</div>
 <div><c:out value="${requestScope.data.ctnt}"/></div>
 
