@@ -41,8 +41,11 @@ public class BoardFavController {
     }
 
     @GetMapping("/fav")
-    public List<BoardDomain> selFavBoardList(BoardDTO param){
+    public Map<String,Object> selFavBoardList(BoardDTO param){
+        Map<String, Object> result = new HashMap();
         param.setSelType(1);
-        return service2.selBoardList(param);
+        result.put("list",service2.selBoardList(param));
+        result.put("maxPageVal",service2.selMaxPageVal(param));
+        return result;
     }
 }

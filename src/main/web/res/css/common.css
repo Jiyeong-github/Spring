@@ -25,3 +25,4 @@ section{ padding-left : 40px; padding-right: 40px;}
 .displayNone{display:none !important;} /*important 주면 얘가 우선순위 됨*/
 .fa-kiss-wink-heart { color: #e74c3c; }
 .pointer { cursor: pointer; }
+.selected {color: tomato;}
